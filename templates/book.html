@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main %}
+<header>
+    <div class="header-container">
+        <div class="menu-items">
+            {% if username == 'Tychinskiy Bogdan' %}
+                <nav>
+                    <a href="/new_dish" class="button">Добавить книгу</a>
+                    <a href="/edit_dish" class="button">Редактировать</a>
+                    <a href="/delete_dish" class="button">Удалить</a><br>
+                    <div style="margin-left: 2px; margin-top: 10px;">Выполнил: Тычинский Богдан</div>
+                </nav>
+            {% endif %}
+        </div>
+        <div class="user-info">
+            <div class="username">
+                {{ username }}
+            </div>
+            <div class="user-actions">
+                <a href="/logout" class="button">Выход</a>
+                <a href="/delete_account" class="button delete-account">Удалить аккаунт</a>
+            </div>
+        </div>
+    </div>
+</header>
+<h1 style="margin-left: 400px;">Книги</h1>
+<form class="searching" method="POST">
+    <div class="search-container">
+    <input type="text" placeholder="Введите название " name="name" class="search-container" style="flex: 1;  border: none; padding: 10px; outline: none;font-size: 16px;">
+    <button type="submit" class="search-button ">Найти</button>
+    </div>
+    <main>
+        <div class="card-container">
+            {% for i in all_recipes %}
+            <div class="card">
+                <h2 class="for_booj" style="margin-top: 0;">{{ i.name_book }}</h2>
+                <div class="photo_boo"><img src="{{i.photo_link}}"></div>
+                <div class="for_book" style="margin-bottom: 3px;">{{ i.avtor }}</div>
+                <div class="for_book">{{ i.izdatelstvo }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}
