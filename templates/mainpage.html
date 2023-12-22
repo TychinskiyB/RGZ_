@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block main %}
+<main>
+    <h1 class="text" style="margin-top: 80px; font-size: 40px;">Книги</h1>
+
+    <form id="filter-form" method="post">
+        <input type="text" id="book" name="book" placeholder="Название">
+        <input type="text" id="author" name="author" placeholder="Автор">
+        <input type="number" id="min_pages" name="min_pages" placeholder="Min страницы">
+        <input type="number" id="max_pages" name="max_pages" placeholder="Mах страницы">
+        <input type="text" id="publisher" name="publisher" placeholder="Издательство">
+            
+        <input class="buttons2" type="submit" value="Применить фильтр">  
+    </form>
+
+
+    <br>
+    <div class="card-container">
+        {% for i in all_books %}
+        <div class="card">
+            <img style="width: 300px;height: 400px;" src="{{i.image_url}}">
+            <h2 class="card-content" style="margin-top: 0px;">{{ i.book }}</h2>
+            <h3 class="card-content" style="margin-top: -15px;">{{ i.author }}</h3>
+            <div class="card-content" style="margin-top: -15px;">{{ i.pages }}</div>
+            <div class="card-content" style="margin-bottom: 8px;">{{ i.publisher }}</div>
+        </div>
+        {% endfor %}
+    </div>  
+    <div class="buttons-container ">
+        <a href="{{ url_for('previous_books', offset=offset) }}" class="buttons2" style="margin-bottom: -200px;">Показать предыдущие 20 книг</a>
+        <a href="{{ url_for('next_books', offset=offset) }}" class="buttons2" >Показать следующие 20 книг</a>
+    </div>
+    
+</main>
+{% endblock %}
